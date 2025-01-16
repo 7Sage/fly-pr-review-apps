@@ -2,7 +2,7 @@
 
 set pid [spawn fly postgres connect --app "$env(INPUT_POSTGRES)"]
 
-set timeout 10
+set timeout 30
 
 expect "postgres=#"
 
