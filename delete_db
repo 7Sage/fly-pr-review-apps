@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-set pid [spawn fly postgres connect --app "$env(INPUT_POSTGRES)"]
+set pid [spawn fly postgres connect --debug --verbose --app "$env(INPUT_POSTGRES)"]
 
 set timeout 30
 
