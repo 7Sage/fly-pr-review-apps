@@ -31,7 +31,7 @@ fi
 if [ "$EVENT_TYPE" = "closed" ]; then
   flyctl apps destroy "$app" -y || true
   if [ -n "$INPUT_POSTGRES" ]; then
-    INPUT_POSTGRES=$INPUT_POSTGRES app=$app expect /delete_db
+    INPUT_POSTGRES=$INPUT_POSTGRES app=$app expect -d /delete_db
   fi
   exit 0
 fi
