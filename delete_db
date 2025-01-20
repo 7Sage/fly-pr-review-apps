@@ -2,6 +2,6 @@
 
 spawn fly ssh console --app "$env(app)"
 expect "#"
-send -- "psql -c \"DROP DATABASE IF EXISTS $env(app) WITH (FORCE); DROP USER IF EXISTS $env(app);\" $DATABASE_URL"
+send -- "psql -c \"DROP DATABASE IF EXISTS $env(app) WITH (FORCE); DROP USER IF EXISTS $env(app);\" \$DATABASE_URL"
 expect "DROP ROLE"
 send -- "exit\r"
