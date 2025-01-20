@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-set pid [spawn fly postgres connect --debug --verbose --app "$env(INPUT_POSTGRES)"]
+set pid [spawn /bin/bash -ci "fly postgres connect --debug --verbose --app \"$env(INPUT_POSTGRES)\""]
 
 set timeout 30
 
@@ -8,11 +8,11 @@ expect "postgres=#"
 
 send -- "DROP DATABASE IF EXISTS $env(app) WITH (FORCE);\r"
 
-expect "postgres=#"
+expect "DROP DATABASE"
 
 send -- "DROP USER IF EXISTS $env(app);\r"
 
-expect "postgres=#"
+expect "DROP ROLE"
 
 send -- "exit\r"
 
