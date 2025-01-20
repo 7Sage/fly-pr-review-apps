@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-spawn fly ssh console -a "$env(app)"
+spawn fly ssh console --app "$env(app)"
 expect "#"
 send -- "psql -c \"DROP DATABASE IF EXISTS $env(app) WITH (FORCE); DROP USER IF EXISTS $env(app);\" $DATABASE_URL"
 expect "DROP ROLE"
