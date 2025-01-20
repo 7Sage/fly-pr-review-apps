@@ -1,24 +1,7 @@
 #!/usr/bin/expect -f
 
-set pid [spawn script -q -c "fly postgres connect --app \"$env(INPUT_POSTGRES)\""]
-
-set timeout 30
-
-expect "postgres=#"
-
-send -- "DROP DATABASE IF EXISTS $env(app) WITH (FORCE);\r"
-
-expect "DROP DATABASE"
-
-send -- "DROP USER IF EXISTS $env(app);\r"
-
+spawn fly ssh console -a "$env(app)"
+expect "#"
+send -- "psql -c \"DROP DATABASE IF EXISTS $env(app) WITH (FORCE); DROP USER IF EXISTS $env(app);\" $DATABASE_URL"
 expect "DROP ROLE"
-
 send -- "exit\r"
-
-set out [wait $pid]
-
-if {[lindex $out 2] == 0} {
-  exit [lindex $out 3]
-}
-exit [lindex $out 2]

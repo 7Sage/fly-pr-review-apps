@@ -29,10 +29,10 @@ fi
 
 # PR was closed - remove the Fly app if one exists and exit.
 if [ "$EVENT_TYPE" = "closed" ]; then
-  flyctl apps destroy "$app" -y || true
   if [ -n "$INPUT_POSTGRES" ]; then
     INPUT_POSTGRES=$INPUT_POSTGRES app=$app expect -d /delete_db
   fi
+  flyctl apps destroy "$app" -y || true
   exit 0
 fi
 
