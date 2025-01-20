@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --no-cache curl jq expect script
+RUN apk add --no-cache curl jq expect util-linux
 
 RUN curl -L https://fly.io/install.sh | FLYCTL_INSTALL=/usr/local sh
 
