@@ -43,6 +43,9 @@ if ! flyctl status --app "$app"; then
   flyctl launch --no-deploy --copy-config --name "$app" --image "$image" --region "$region" --org "$org" $INPUT_LAUNCH_OPTIONS
   # Restore the original config file
   cp "$config.bak" "$config"
+  # Since we're specifying UDP port config we need to manually assign shared IPs
+  flyctl ips allocate-v4 --shared -a "$app"
+  flyctl ips allocate-v6 -a "$app"
 fi
 if [ -n "$INPUT_SECRETS" ]; then
   echo $INPUT_SECRETS | tr " " "\n" | flyctl secrets import --app "$app"
